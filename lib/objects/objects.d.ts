@@ -41,6 +41,18 @@ export declare const renameKeys: (object: object, callback: (key: string) => str
  */
 export declare const objectMap: (object: object, callback: (value: any, key: string) => any) => object;
 /**
+ * Mapping through object keys and returns new filtered object
+ * @example
+ * const object = {engine: "value 1", test: "value 2"};
+ *
+ * // {engine: "value 1"}
+ * const newObject = objectFilter(object, (value, key) => key === "engine");
+ * @param {object} object - Object to update.
+ * @param {function} callback - function that is called on every object receives (value, key) it returns a boolean
+ * @return {object} returns udapted object
+ */
+export declare const objectFilter: (object: object, callback: (value: any, key: string) => any) => object;
+/**
  * Mapping through object keys and taking values form second object under same key
  * @example
  * const loopObject = {KeyName01: "some data"};
