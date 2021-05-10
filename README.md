@@ -16,7 +16,9 @@
   - `renameKeys` &mdash; Update object keys with callback.
   - `objectMap` &mdash; Mapping through object keys and return object with updated values 
   - `objectFilter` &mdash; Mapping through object keys and returns new filtered object
+  - `cleanObject` &mdash; Mapping through object keys and removing undefined values
   - `swapObjectData` &mdash; Mapping through object keys and taking values form second object under same key
+  - `swapObjectCleanedData` &mdash; Mapping through object keys and taking values form second object under same key, all undefined values are removed
 
 - **Functions**
   - `promisifyCallback` &mdash; Promisify functions that accept callback that will be called upon resolve, example wainting for message from api
