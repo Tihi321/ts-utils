@@ -86,6 +86,20 @@ export var objectFilter = function (object, callback) {
     return returnObj;
 };
 /**
+ * Mapping through object keys and removing undefined values
+ * @example
+ * const objectToClean = {test: "different data", test02: undefined};
+ *
+ * // {test: "different data"}
+ * const newObject = cleanObject(objectToClean);
+ * @param {object} export const cleanObject = object => objectFilter(object, value => Bolean(value));
+ - Object to loop.
+ * @return {object} returns udapted object
+ */
+export var cleanObject = function (object) {
+    return objectFilter(object, function (value) { return Boolean(value); });
+};
+/**
  * Mapping through object keys and taking values form second object under same key
  * @example
  * const loopObject = {KeyName01: "some data"};
@@ -101,4 +115,17 @@ export var swapObjectData = function (loopObject, valuesObject) {
     var paramObject = valuesObject;
     return objectMap(loopObject, function (_val, key) { return paramObject[key]; });
 };
+/**
+ * Mapping through object keys and taking values form second object under same key, all undefined values are removed
+ * @example
+ * const loopObject = {KeyName01: "some data"};
+ * const valuesObject = {KeyName01: "different data", KeyName02: "different data"};
+ *
+ * // {KeyName01: "different data"}
+ * const newObject = swapObjectData(loopObject, valuesObject);
+ * @param {object} loopObject - Object to loop.
+ * @param {object} valuesObject - Object to take values form
+ * @return {object} returns udapted object
+ */
+export var swapObjectCleanedData = function (loopObject, valuesObject) { return cleanObject(swapObjectData(loopObject, valuesObject)); };
 //# sourceMappingURL=objects.js.map

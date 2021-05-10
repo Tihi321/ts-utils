@@ -53,6 +53,18 @@ export declare const objectMap: (object: object, callback: (value: any, key: str
  */
 export declare const objectFilter: (object: object, callback: (value: any, key: string) => any) => object;
 /**
+ * Mapping through object keys and removing undefined values
+ * @example
+ * const objectToClean = {test: "different data", test02: undefined};
+ *
+ * // {test: "different data"}
+ * const newObject = cleanObject(objectToClean);
+ * @param {object} export const cleanObject = object => objectFilter(object, value => Bolean(value));
+ - Object to loop.
+ * @return {object} returns udapted object
+ */
+export declare const cleanObject: (object: object) => object;
+/**
  * Mapping through object keys and taking values form second object under same key
  * @example
  * const loopObject = {KeyName01: "some data"};
@@ -65,4 +77,17 @@ export declare const objectFilter: (object: object, callback: (value: any, key: 
  * @return {object} returns udapted object
  */
 export declare const swapObjectData: (loopObject: object, valuesObject: object) => object;
+/**
+ * Mapping through object keys and taking values form second object under same key, all undefined values are removed
+ * @example
+ * const loopObject = {KeyName01: "some data"};
+ * const valuesObject = {KeyName01: "different data", KeyName02: "different data"};
+ *
+ * // {KeyName01: "different data"}
+ * const newObject = swapObjectData(loopObject, valuesObject);
+ * @param {object} loopObject - Object to loop.
+ * @param {object} valuesObject - Object to take values form
+ * @return {object} returns udapted object
+ */
+export declare const swapObjectCleanedData: (loopObject: object, valuesObject: object) => object;
 //# sourceMappingURL=objects.d.ts.map
