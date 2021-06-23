@@ -31,22 +31,32 @@ export const pickFirstObjectItem = (object: object, subValue?: string) => {
 /**
  * Update object keys with callback
  * @example
- * const object = {Service01: "someValue", Service02: "someValue"};
+ * const object = {Service1: "someValue1", Service2: "someValue2", Service3: "someValue3"};
  *
- * // {Desktop-Service01: "someValue", Desktop-Service02: "someValue"}
- * const newObject = renameKeys(object, key => `${machineName}-${name}`);
+ * // {Desktop-Service1-value-example: "someValue1", Desktop-Service2-key-example: "someValue2", Desktop-Service3: "someValue3"}
+ * const newObject = renameKeys(object, (key, value) => {
+ *  if (value === "someValue1") {
+ *    return `${machineName}-${name}-value-example`;
+ *  }
+ *
+ *  if (key === "Service2") {
+ *    return `${machineName}-${name}-key-example`;
+ *  }
+ *
+ *  return `${machineName}-${name}`;
+ * });
  * @param {object} object - Object to update.
- * @param {function} callback - function that needs to return new key name - receives (key)
+ * @param {function} callback - function that needs to return new key name - receives (key, value)
  * @return {object} returns object containing new keys
  */
 export const renameKeys = (
   object: object,
-  callback: (key: string) => string
+  callback: (key: string, value: any) => string
 ) => {
   const returnObj: Record<string, any> = {};
   const paramObject: Record<string, any> = object;
   Object.keys(object).forEach(key => {
-    returnObj[callback(key)] = paramObject[key];
+    returnObj[callback(key, paramObject[key])] = paramObject[key];
   });
 
   return returnObj as object;
