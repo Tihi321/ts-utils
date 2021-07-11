@@ -12,13 +12,18 @@
 </div>
 
 - **Objects**
+
   - `pickFirstObjectItem` &mdash; Retrives first element from array value of object keys, used in combination with groupBy from lodash, groupBy returns grouped values from array with provided key in callback. If key is unique array will have one value. This can be used to take out that value
   - `renameKeys` &mdash; Update object keys with callback.
-  - `objectMap` &mdash; Mapping through object keys and return object with updated values 
+  - `objectMap` &mdash; Mapping through object keys and return object with updated values
   - `objectFilter` &mdash; Mapping through object keys and returns new filtered object
   - `cleanObject` &mdash; Mapping through object keys and removing undefined values
   - `swapObjectData` &mdash; Mapping through object keys and taking values form second object under same key
   - `swapObjectCleanedData` &mdash; Mapping through object keys and taking values form second object under same key, all undefined values are removed
 
 - **Functions**
+
   - `promisifyCallback` &mdash; Promisify functions that accept callback that will be called upon resolve, example wainting for message from api
+
+- **Arrays**
+  - `includesAll` &mdash; Check if all keys from source array are in target array
