@@ -40,4 +40,4 @@
 - **Browser**
   - `isBrowser` &mdash; Detects if code is running in a browser
   - `domReady` &mdash; Runs function when content is rendered
-  - `addOnChangeCallback` &mdash; Calls custom funtion on every history change
+  - `addOnHistoryChangeCallback` &mdash; Calls custom funtion on every history change

@@ -39,13 +39,13 @@ export const domReady = (callback: any): void => {
  * @example
  * const callback = (args, state) => {...};
  *
- * addOnChangeCallback(callback);
+ * addOnHistoryChangeCallback(callback);
  *
  * @param {Function} callback - function to be called when history is updated, it receives history arguments, and state
  * @return {void}
  */
 
-export const addOnChangeCallback = (
+export const addOnHistoryChangeCallback = (
   callback: (args: any, state: any) => void
 ) => {
   if (isBrowser()) {

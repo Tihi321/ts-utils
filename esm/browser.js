@@ -32,12 +32,12 @@ export var domReady = function (callback) {
  * @example
  * const callback = (args, state) => {...};
  *
- * addOnChangeCallback(callback);
+ * addOnHistoryChangeCallback(callback);
  *
  * @param {Function} callback - function to be called when history is updated, it receives history arguments, and state
  * @return {void}
  */
-export var addOnChangeCallback = function (callback) {
+export var addOnHistoryChangeCallback = function (callback) {
     if (isBrowser()) {
         // eslint-disable-next-line func-names
         (function (history) {

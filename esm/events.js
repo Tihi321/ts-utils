@@ -1,4 +1,4 @@
-import { addOnChangeCallback, isBrowser } from "./browser";
+import { addOnHistoryChangeCallback, isBrowser } from "./browser";
 /**
  * Dispatches custom event
  * @example
@@ -33,7 +33,7 @@ export var dispatchEvent = function (_a) {
  */
 export var addOnHistoryChangeEvent = function (name, element) {
     if (isBrowser()) {
-        addOnChangeCallback(function (args, state) {
+        addOnHistoryChangeCallback(function (args, state) {
             dispatchEvent({
                 name: name,
                 element: element,

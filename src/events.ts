@@ -1,4 +1,4 @@
-import { addOnChangeCallback, isBrowser } from "./browser";
+import { addOnHistoryChangeCallback, isBrowser } from "./browser";
 import { THistoryArguments } from "./typings/history";
 
 export type TSendCustomEvent = {
@@ -48,7 +48,7 @@ export const dispatchEvent = ({
 
 export const addOnHistoryChangeEvent = (name: string, element: Element) => {
   if (isBrowser()) {
-    addOnChangeCallback((args: THistoryArguments, state) => {
+    addOnHistoryChangeCallback((args: THistoryArguments, state) => {
       dispatchEvent({
         name,
         element,
