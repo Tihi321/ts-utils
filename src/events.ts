@@ -1,7 +1,8 @@
-import { isBrowser } from "./browser";
+import { addOnChangeCallback, isBrowser } from "./browser";
+import { THistoryArguments } from "./typings/history";
 
 export type TSendCustomEvent = {
-  element: HTMLElement;
+  element: Element;
   name: string;
   params?: any;
 };
@@ -30,5 +31,34 @@ export const dispatchEvent = ({
       : new CustomEvent(name);
 
     element.dispatchEvent(event);
+  }
+};
+
+/**
+ * Disptaches custom event on every history change
+ * @example
+ * const domElement = document.querySelector(".dispatch-element");
+ *
+ * addOnChangeCallback("history-changed", domElement);
+ *
+ * @param {string} name - name of the event to be disptached
+ * @param {Element} element - dom element on which to dispatch event
+ * @return {void}
+ */
+
+export const addOnHistoryChangeEvent = (name: string, element: Element) => {
+  if (isBrowser()) {
+    addOnChangeCallback((args: THistoryArguments, state) => {
+      dispatchEvent({
+        name,
+        element,
+        params: {
+          data: args[0],
+          unused: args[1],
+          url: args[2],
+          state
+        }
+      });
+    });
   }
 };

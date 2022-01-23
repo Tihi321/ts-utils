@@ -1,4 +1,4 @@
-import { isBrowser } from "./browser";
+import { addOnChangeCallback, isBrowser } from "./browser";
 /**
  * Dispatches custom event
  * @example
@@ -18,6 +18,33 @@ export var dispatchEvent = function (_a) {
             })
             : new CustomEvent(name);
         element.dispatchEvent(event_1);
+    }
+};
+/**
+ * Disptaches custom event on every history change
+ * @example
+ * const domElement = document.querySelector(".dispatch-element");
+ *
+ * addOnChangeCallback("history-changed", domElement);
+ *
+ * @param {string} name - name of the event to be disptached
+ * @param {Element} element - dom element on which to dispatch event
+ * @return {void}
+ */
+export var addOnHistoryChangeEvent = function (name, element) {
+    if (isBrowser()) {
+        addOnChangeCallback(function (args, state) {
+            dispatchEvent({
+                name: name,
+                element: element,
+                params: {
+                    data: args[0],
+                    unused: args[1],
+                    url: args[2],
+                    state: state
+                }
+            });
+        });
     }
 };
 //# sourceMappingURL=events.js.map

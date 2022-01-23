@@ -35,7 +35,9 @@
 - **Events**
 
   - `dispatchEvent` &mdash; Dispatches custom event
+  - `addOnHistoryChangeEvent` &mdash; Disptaches custom event on every history change
 
 - **Browser**
   - `isBrowser` &mdash; Detects if code is running in a browser
   - `domReady` &mdash; Runs function when content is rendered
+  - `addOnChangeCallback` &mdash; Calls custom funtion on every history change
