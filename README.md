@@ -26,4 +26,16 @@
   - `promisifyCallback` &mdash; Promisify functions that accept callback that will be called upon resolve, example wainting for message from api
 
 - **Arrays**
+
   - `includesAll` &mdash; Check if all keys from source array are in target array
+  - `rangeEach` &mdash; Callback is executed a range number of times
+  - `rangeMap` &mdash; Creates a range custom array
+  - `rangeReduce` &mdash; Reduces a range array
+
+- **Events**
+
+  - `dispatchEvent` &mdash; Dispatches custom event
+
+- **Browser**
+  - `isBrowser` &mdash; Detects if code is running in a browser
+  - `domReady` &mdash; Runs function when content is rendered
