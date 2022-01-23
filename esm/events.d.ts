@@ -1,6 +1,6 @@
 /// <reference types="web" />
 export declare type TSendCustomEvent = {
-    element: HTMLElement;
+    element: Element;
     name: string;
     params?: any;
 };
@@ -15,4 +15,16 @@ export declare type TSendCustomEvent = {
  * @return {void}
  */
 export declare const dispatchEvent: ({ element, params, name }: TSendCustomEvent) => void;
+/**
+ * Disptaches custom event on every history change
+ * @example
+ * const domElement = document.querySelector(".dispatch-element");
+ *
+ * addOnChangeCallback("history-changed", domElement);
+ *
+ * @param {string} name - name of the event to be disptached
+ * @param {Element} element - dom element on which to dispatch event
+ * @return {void}
+ */
+export declare const addOnHistoryChangeEvent: (name: string, element: Element) => void;
 //# sourceMappingURL=events.d.ts.map
