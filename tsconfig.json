@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "es2019",
-      "esnext.asynciterable"
-    ],
+    "lib": ["es2019", "esnext.asynciterable"],
     "jsx": "react",
     "outDir": "lib",
     "declaration": true,
@@ -18,13 +15,11 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "typeRoots": ["node_modules/@types"],
-    "esModuleInterop": true ,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

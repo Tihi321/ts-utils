@@ -28,10 +28,14 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 export var promisifyCallback = function (callback) {
     var args = [];
@@ -39,7 +43,7 @@ export var promisifyCallback = function (callback) {
         args[_i - 1] = arguments[_i];
     }
     return new Promise(function (resolve) {
-        return callback.apply(void 0, __spreadArray(__spreadArray([], args), [function (props) { return resolve(__assign({}, props)); }]));
+        return callback.apply(void 0, __spreadArray(__spreadArray([], args, false), [function (props) { return resolve(__assign({}, props)); }], false));
     });
 };
 //# sourceMappingURL=functions.js.map
