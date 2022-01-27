@@ -38,6 +38,10 @@
   - `dispatchEvent` &mdash; Dispatches custom event
   - `addOnHistoryChangeEvent` &mdash; Disptaches custom event on every history change
 
+- **Api**
+
+  - `fetchApi` &mdash; Enables for ease use of fetch on node and browser, woth options for generating query string and prefix
+
 - **Browser**
   - `isBrowser` &mdash; Detects if code is running in a browser
   - `domReady` &mdash; Runs function when content is rendered
