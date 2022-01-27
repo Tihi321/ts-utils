@@ -31,6 +31,7 @@
   - `rangeEach` &mdash; Callback is executed a range number of times
   - `rangeMap` &mdash; Creates a range custom array
   - `rangeReduce` &mdash; Reduces a range array
+  - `orderedPromiseAll` &mdash; Return array with all promises resolved in order, one after another
 
 - **Events**
 

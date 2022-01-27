@@ -79,3 +79,41 @@ export const rangeReduce = (
 
   return returnItem;
 };
+
+/**
+ * Return array with all promises resolved in order, one after another
+ * @example
+ * const promiseCallback = (item) => new Promise(resolve => setTimeout(resolve(new Date().getSeconds() + item), 1000));
+ *
+ * const resultCallback = (item, result) => ({ item, result });
+ *
+ * // [{ item: 0, result: (0 + seconds) }, { item: 1, result: 1 + seconds }, { item: 2, result: 3 + seconds } ...]
+ * const result = orderedPromiseAll([0, 1, 2, 3, 4, 5], promiseCallback, resultCallback);
+ *
+ * @param {Array []} promises - any Array of values
+ * @param {Function} promiseCallback - callback that returns a promise to be resolved
+ * @param {Function} resultCallback - callback that returns item to add to output array, it takes item and resolve of promise
+ * @returns results array after all promises are resolved
+ */
+
+export const orderedPromiseAll = async (
+  promises: Array<any>,
+  promiseCallback: (item: any) => Promise<any>,
+  resultCallback: (item: any, result: any, index: number) => any = (
+    _item: any,
+    result: any
+  ) => result
+): Promise<any[]> => {
+  let output: any[] = [];
+
+  for (let index = 0; index < promises.length; index += 1) {
+    const item = promises[index];
+
+    // eslint-disable-next-line no-await-in-loop
+    const result = await promiseCallback(item);
+
+    output = [...output, resultCallback(item, result, index)];
+  }
+
+  return output;
+};
