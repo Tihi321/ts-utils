@@ -18,14 +18,14 @@ export const fetchApi = (
 
   if (typeof url === "string") {
     fetchData(url)
-      .then(response => {
+      .then((response: any) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
 
         return response.json();
       })
-      .then(response => toCall(response));
+      .then((response: any) => toCall(response));
   } else {
     let fetchUrl;
     const urlString = get(url, "url");
@@ -50,13 +50,13 @@ export const fetchApi = (
       !isEmpty(sufix) ? `${fetchUrl}${sufix}` : fetchUrl,
       get(url, "options")
     )
-      .then(response => {
+      .then((response: any) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
 
         return response.json();
       })
-      .then(response => toCall(response));
+      .then((response: any) => toCall(response));
   }
 };

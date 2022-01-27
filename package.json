@@ -1,6 +1,6 @@
 {
   "name": "tsl-utils",
-  "version": "1.0.17",
+  "version": "1.0.23",
   "description": "Collection of Lodash like utilities",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -39,7 +39,6 @@
     "@types/lodash": "^4.14.168",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
-    "@types/node-fetch": "^2.5.10",
     "eslint": "^7.20.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.11.0",
@@ -78,6 +77,7 @@
     "./src,/*.tsx": "eslint"
   },
   "dependencies": {
+    "@types/node-fetch": "^2.5.10",
     "@types/web": "^0.0.50",
     "node-fetch": "^2.6.1",
     "lodash": "^4.17.21"

@@ -1,15 +1,13 @@
-import { RequestInit } from "node-fetch";
-
 import { fetchApi } from "./fetch";
 
 type TResponse = {
   url: string;
-  options?: RequestInit;
+  options?: any;
 };
 
 const url: string = "https://www.googleapis.com/v2";
 
-const makeResponse = (urlArgument: string, options?: RequestInit) => ({
+const makeResponse = (urlArgument: string, options?: any) => ({
   url: urlArgument,
   options
 });
@@ -19,7 +17,7 @@ const mockResponse = (res: any) => ({
   ok: true
 });
 
-const nodeFetchMock = (urlArgument: string, options?: RequestInit) =>
+const nodeFetchMock = (urlArgument: string, options?: any) =>
   new Promise(resolve => {
     resolve(mockResponse(makeResponse(urlArgument, options)));
   });
