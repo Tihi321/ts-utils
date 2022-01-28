@@ -1,29 +1,23 @@
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import map from "lodash/map";
-import nodeFetch from "node-fetch";
 
-import { isBrowser } from "../browser";
-import { TFetchQuery, TFetchUrl } from "../typings";
+import { TFetchApiParams, TFetchQuery } from "../typings";
+import { queryStringBuilder } from "./query";
 
-export const fetchApi = (
-  url: TFetchUrl,
-  toCall: (response: any) => void,
-  nodeFetchCallback: typeof nodeFetch = nodeFetch
-) => {
-  const fetchData: typeof nodeFetch =
-    isBrowser() && window.fetch
-      ? ((window.fetch as unknown) as typeof nodeFetch)
-      : nodeFetchCallback;
-
+export const fetchApi = ({
+  url,
+  toCall,
+  callFunction = window.fetch,
+  json = true
+}: TFetchApiParams) => {
   if (typeof url === "string") {
-    fetchData(url)
+    callFunction(url)
       .then((response: any) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
 
-        return response.json();
+        return json ? response.json() : response;
       })
       .then((response: any) => toCall(response));
   } else {
@@ -31,13 +25,8 @@ export const fetchApi = (
     const urlString = get(url, "url");
     const urlQuery = get(url, "query") as TFetchQuery[] | undefined;
 
-    if (!isEmpty(urlQuery)) {
-      const queryString = map(urlQuery, values => {
-        const key = get(values, "key");
-        const value = get(values, "value");
-
-        return isEmpty(value) ? key : `${key}=${value}`;
-      }).join("&");
+    if (urlQuery !== undefined && !isEmpty(urlQuery)) {
+      const queryString = queryStringBuilder(urlQuery);
 
       fetchUrl = `${urlString}?${queryString}`;
     } else {
@@ -46,7 +35,7 @@ export const fetchApi = (
 
     const sufix = get(url, "suffix");
 
-    fetchData(
+    callFunction(
       !isEmpty(sufix) ? `${fetchUrl}${sufix}` : fetchUrl,
       get(url, "options")
     )
@@ -55,7 +44,7 @@ export const fetchApi = (
           throw new Error(response.statusText);
         }
 
-        return response.json();
+        return json ? response.json() : response;
       })
       .then((response: any) => toCall(response));
   }

@@ -1,1 +1,1 @@
-{"version":3,"file":"fetch.d.ts","sourceRoot":"","sources":["../../src/api/fetch.ts"],"names":[],"mappings":"AAGA,OAAO,SAAS,MAAM,YAAY,CAAC;AAGnC,OAAO,EAAe,SAAS,EAAE,MAAM,YAAY,CAAC;AAEpD,eAAO,MAAM,QAAQ,QACd,SAAS,qBACK,GAAG,KAAK,IAAI,sBACZ,gBAAgB,SAkDpC,CAAC"}
+{"version":3,"file":"fetch.d.ts","sourceRoot":"","sources":["../../src/api/fetch.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,eAAe,EAAe,MAAM,YAAY,CAAC;AAG1D,eAAO,MAAM,QAAQ,wCAKlB,eAAe,SAuCjB,CAAC"}

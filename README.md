@@ -40,7 +40,7 @@
 
 - **Api**
 
-  - `fetchApi` &mdash; Enables for ease use of fetch on node and browser, woth options for generating query string and prefix
+  - `fetchApi` &mdash; Fetch helper with options for generating query string and prefix, takes custom fetchCallback for usage if node-fetch should be used
 
 - **Browser**
   - `isBrowser` &mdash; Detects if code is running in a browser

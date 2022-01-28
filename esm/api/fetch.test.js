@@ -54,10 +54,14 @@ test("It will call fetch with default url string", function () { return __awaite
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, new Promise(function (resolve) {
-                    fetchApi(url, function (response) {
-                        jestCallback(response);
-                        resolve(undefined);
-                    }, nodeFetchMock);
+                    fetchApi({
+                        url: url,
+                        toCall: function (response) {
+                            jestCallback(response);
+                            resolve(undefined);
+                        },
+                        callFunction: nodeFetchMock
+                    });
                 })];
             case 1:
                 _a.sent();
@@ -71,21 +75,25 @@ test("It will call fetch with query arguemnts", function () { return __awaiter(v
         switch (_a.label) {
             case 0: return [4 /*yield*/, new Promise(function (resolve) {
                     fetchApi({
-                        url: url,
-                        query: [
-                            {
-                                key: "firstKey",
-                                value: "firstVal"
-                            },
-                            {
-                                key: "secondKey",
-                                value: "secondVal"
-                            }
-                        ]
-                    }, function (response) {
-                        jestCallback(response);
-                        resolve(undefined);
-                    }, nodeFetchMock);
+                        url: {
+                            url: url,
+                            query: [
+                                {
+                                    key: "firstKey",
+                                    value: "firstVal"
+                                },
+                                {
+                                    key: "secondKey",
+                                    value: "secondVal"
+                                }
+                            ]
+                        },
+                        toCall: function (response) {
+                            jestCallback(response);
+                            resolve(undefined);
+                        },
+                        callFunction: nodeFetchMock
+                    });
                 })];
             case 1:
                 _a.sent();

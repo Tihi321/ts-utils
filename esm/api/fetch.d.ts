@@ -1,4 +1,3 @@
-import nodeFetch from "node-fetch";
-import { TFetchUrl } from "../typings";
-export declare const fetchApi: (url: TFetchUrl, toCall: (response: any) => void, nodeFetchCallback?: typeof nodeFetch) => void;
+import { TFetchApiParams } from "../typings";
+export declare const fetchApi: ({ url, toCall, callFunction, json }: TFetchApiParams) => void;
 //# sourceMappingURL=fetch.d.ts.map

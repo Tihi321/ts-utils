@@ -1,20 +1,15 @@
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import map from "lodash/map";
-import nodeFetch from "node-fetch";
-import { isBrowser } from "../browser";
-export var fetchApi = function (url, toCall, nodeFetchCallback) {
-    if (nodeFetchCallback === void 0) { nodeFetchCallback = nodeFetch; }
-    var fetchData = isBrowser() && window.fetch
-        ? window.fetch
-        : nodeFetchCallback;
+import { queryStringBuilder } from "./query";
+export var fetchApi = function (_a) {
+    var url = _a.url, toCall = _a.toCall, _b = _a.callFunction, callFunction = _b === void 0 ? window.fetch : _b, _c = _a.json, json = _c === void 0 ? true : _c;
     if (typeof url === "string") {
-        fetchData(url)
+        callFunction(url)
             .then(function (response) {
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
-            return response.json();
+            return json ? response.json() : response;
         })
             .then(function (response) { return toCall(response); });
     }
@@ -22,24 +17,20 @@ export var fetchApi = function (url, toCall, nodeFetchCallback) {
         var fetchUrl = void 0;
         var urlString = get(url, "url");
         var urlQuery = get(url, "query");
-        if (!isEmpty(urlQuery)) {
-            var queryString = map(urlQuery, function (values) {
-                var key = get(values, "key");
-                var value = get(values, "value");
-                return isEmpty(value) ? key : "".concat(key, "=").concat(value);
-            }).join("&");
+        if (urlQuery !== undefined && !isEmpty(urlQuery)) {
+            var queryString = queryStringBuilder(urlQuery);
             fetchUrl = "".concat(urlString, "?").concat(queryString);
         }
         else {
             fetchUrl = urlString;
         }
         var sufix = get(url, "suffix");
-        fetchData(!isEmpty(sufix) ? "".concat(fetchUrl).concat(sufix) : fetchUrl, get(url, "options"))
+        callFunction(!isEmpty(sufix) ? "".concat(fetchUrl).concat(sufix) : fetchUrl, get(url, "options"))
             .then(function (response) {
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
-            return response.json();
+            return json ? response.json() : response;
         })
             .then(function (response) { return toCall(response); });
     }

@@ -26,14 +26,14 @@ const jestCallback = jest.fn((response: TResponse): TResponse => response);
 
 test("It will call fetch with default url string", async () => {
   await new Promise(resolve => {
-    fetchApi(
+    fetchApi({
       url,
-      response => {
+      toCall: response => {
         jestCallback(response);
         resolve(undefined);
       },
-      nodeFetchMock as any
-    );
+      callFunction: nodeFetchMock
+    });
   });
 
   expect(jestCallback.mock.calls).toEqual([[makeResponse(url)]]);
@@ -41,8 +41,8 @@ test("It will call fetch with default url string", async () => {
 
 test("It will call fetch with query arguemnts", async () => {
   await new Promise(resolve => {
-    fetchApi(
-      {
+    fetchApi({
+      url: {
         url,
         query: [
           {
@@ -55,12 +55,12 @@ test("It will call fetch with query arguemnts", async () => {
           }
         ]
       },
-      response => {
+      toCall: response => {
         jestCallback(response);
         resolve(undefined);
       },
-      nodeFetchMock as any
-    );
+      callFunction: nodeFetchMock
+    });
   });
 
   expect(jestCallback.mock.calls).toEqual([
