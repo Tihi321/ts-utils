@@ -25,6 +25,11 @@
 
   - `promisifyCallback` &mdash; Promisify functions that accept callback that will be called upon resolve, example wainting for message from api
 
+- **Selectors**
+
+  - `generateSelector` &mdash; Function that generates selector for reselect library
+  - `combineSelector` &mdash; Function that allows usage of selector logic outside of reselect
+
 - **Arrays**
 
   - `includesAll` &mdash; Check if all keys from source array are in target array
