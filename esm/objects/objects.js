@@ -56,6 +56,22 @@ export var renameKeys = function (object, callback) {
     return returnObj;
 };
 /**
+ * forEach with index value
+ * @example
+ * const object = {KeyName: {a: 4, b: 8}};
+ *
+ * objectLoop(object, (value, key, index) => {...});
+ * @param {object} object - Object to update.
+ * @param {function} callback - function that is called on every object receives (value, key)
+ * @return {object} returns udapted object
+ */
+export var objectLoop = function (object, callback) {
+    Object.entries(object).forEach(function (_a, index) {
+        var key = _a[0], value = _a[1];
+        callback(value, key, index);
+    });
+};
+/**
  * Mapping through object keys and return object with updated values
  * @example
  * const object = {KeyName: {a: 4, b: 8}};

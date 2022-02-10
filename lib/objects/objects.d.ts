@@ -39,6 +39,17 @@ export declare const pickFirstObjectItem: (object: object, subValue?: string | u
  */
 export declare const renameKeys: (object: object, callback: (key: string, value: any) => string) => object;
 /**
+ * forEach with index value
+ * @example
+ * const object = {KeyName: {a: 4, b: 8}};
+ *
+ * objectLoop(object, (value, key, index) => {...});
+ * @param {object} object - Object to update.
+ * @param {function} callback - function that is called on every object receives (value, key)
+ * @return {object} returns udapted object
+ */
+export declare const objectLoop: (object: object, callback: (value: any, key: string, index: number) => any) => void;
+/**
  * Mapping through object keys and return object with updated values
  * @example
  * const object = {KeyName: {a: 4, b: 8}};
