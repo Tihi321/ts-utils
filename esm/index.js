@@ -1,7 +1,7 @@
-export * from "./events";
+export * from "./api";
 export * from "./browser";
+export * from "./events";
 export * from "./objects";
-export * from "./typings";
 export * from "./selectors";
-export * from "./api/fetch";
+export * from "./typings";
 //# sourceMappingURL=index.js.map
