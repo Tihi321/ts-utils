@@ -1,5 +1,5 @@
-import { addOnHistoryChangeCallback, isBrowser } from "./browser";
-import { THistoryArguments } from "./typings/history";
+import { addOnHistoryChangeCallback, isBrowser } from "../browser";
+import { THistoryArguments } from "../typings/history";
 
 export type TSendCustomEvent = {
   element: Element;
@@ -18,22 +18,18 @@ export type TSendCustomEvent = {
  * @return {void}
  */
 
-export const dispatchEvent = ({
-  element,
-  params,
-  name
-}: TSendCustomEvent): void => {
+export const dispatchEvent = ({ element, params, name }: TSendCustomEvent): void => {
   const defaultParams = {
     bubbles: true,
     cancelable: true,
-    composed: true
+    composed: true,
   };
 
   if (isBrowser()) {
     const event = params
       ? new CustomEvent(name, {
           ...defaultParams,
-          detail: params
+          detail: params,
         })
       : new CustomEvent(name, defaultParams);
 
@@ -63,8 +59,8 @@ export const addOnHistoryChangeEvent = (name: string, element: Element) => {
           data: args[0],
           unused: args[1],
           url: args[2],
-          state
-        }
+          state,
+        },
       });
     });
   }
