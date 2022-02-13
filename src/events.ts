@@ -23,12 +23,19 @@ export const dispatchEvent = ({
   params,
   name
 }: TSendCustomEvent): void => {
+  const defaultParams = {
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  };
+
   if (isBrowser()) {
     const event = params
       ? new CustomEvent(name, {
+          ...defaultParams,
           detail: params
         })
-      : new CustomEvent(name);
+      : new CustomEvent(name, defaultParams);
 
     element.dispatchEvent(event);
   }
