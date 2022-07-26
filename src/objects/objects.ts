@@ -20,9 +20,7 @@ import { head } from "lodash";
 export const pickFirstObjectItem = (object: object, subValue?: string) => {
   const returnObj: Record<string, any> = {};
   Object.entries(object).forEach(([key, values]) => {
-    returnObj[key] = subValue
-      ? head(values as Array<any>)[subValue]
-      : head(values);
+    returnObj[key] = subValue ? head(values as Array<any>)[subValue] : head(values);
   });
 
   return returnObj as object;
@@ -49,13 +47,10 @@ export const pickFirstObjectItem = (object: object, subValue?: string) => {
  * @param {function} callback - function that needs to return new key name - receives (key, value)
  * @return {object} returns object containing new keys
  */
-export const renameKeys = (
-  object: object,
-  callback: (key: string, value: any) => string
-) => {
+export const renameKeys = (object: object, callback: (key: string, value: any) => string) => {
   const returnObj: Record<string, any> = {};
   const paramObject: Record<string, any> = object;
-  Object.keys(object).forEach(key => {
+  Object.keys(object).forEach((key) => {
     returnObj[callback(key, paramObject[key])] = paramObject[key];
   });
 
@@ -82,6 +77,49 @@ export const objectLoop = (
 };
 
 /**
+ * Takes array of keys, value and object. Returns new object with updated last key with value, and all previous keys are checked if they do not exist they are created dynamically
+ *
+ * @example
+ * const object = {first: {a: 4, b: 8}};
+ * const keys = ["first", "a"];
+ *
+ * // {first: {a: 2, b: 8}}
+ * const updatedObject = setObjectLeaf(["first", "a"], 2, object);
+ *
+ * // {first: {c: 5}}
+ * const updatedObject = setObjectLeaf(["first", "c"], 5, {});
+ *
+ * @param {Array} keys array of string keys for object
+ * @param  {any} value value to add into nested key
+ * @param  {Object} object object to populate
+ * @param  {Function} functionCallback optional function that is called when setting last key, it receives new value and old value and what is returned it is set in that key
+ * @returns returns new object with new added subkey with value
+ */
+export function setObjectLeaf(
+  keys: Array<string>,
+  value: any,
+  object: object = {},
+  functionCallback: Function
+) {
+  const returnObject = JSON.parse(JSON.stringify(object));
+
+  const key = keys.pop();
+  const pointer = keys.reduce((accumulator, currentValue) => {
+    if (accumulator[currentValue] === undefined) {
+      accumulator[currentValue] = {};
+    }
+
+    return accumulator[currentValue];
+  }, returnObject);
+
+  pointer[key as string] = functionCallback
+    ? functionCallback(value, pointer[key as string])
+    : value;
+
+  return returnObject;
+}
+
+/**
  * Mapping through object keys and return object with updated values
  * @example
  * const object = {KeyName: {a: 4, b: 8}};
@@ -92,10 +130,7 @@ export const objectLoop = (
  * @param {function} callback - function that is called on every object receives (value, key)
  * @return {object} returns udapted object
  */
-export const objectMap = (
-  object: object,
-  callback: (value: any, key: string) => any
-) => {
+export const objectMap = (object: object, callback: (value: any, key: string) => any) => {
   const returnObj: Record<string, any> = {};
   Object.entries(object).forEach(([key, value]) => {
     returnObj[key] = callback(value, key);
@@ -115,10 +150,7 @@ export const objectMap = (
  * @param {function} callback - function that is called on every object receives (value, key) it returns a boolean
  * @return {object} returns udapted object
  */
-export const objectFilter = (
-  object: object,
-  callback: (value: any, key: string) => any
-) => {
+export const objectFilter = (object: object, callback: (value: any, key: string) => any) => {
   const returnObj: Record<string, any> = {};
   Object.entries(object).forEach(([key, value]) => {
     if (callback(value, key)) {
@@ -140,8 +172,7 @@ export const objectFilter = (
  - Object to loop.
  * @return {object} returns udapted object
  */
-export const cleanObject = (object: object) =>
-  objectFilter(object, value => Boolean(value));
+export const cleanObject = (object: object) => objectFilter(object, (value) => Boolean(value));
 
 /**
  * Mapping through object keys and taking values form second object under same key
@@ -173,7 +204,5 @@ export const swapObjectData = (loopObject: object, valuesObject: object) => {
  * @param {object} valuesObject - Object to take values form
  * @return {object} returns udapted object
  */
-export const swapObjectCleanedData = (
-  loopObject: object,
-  valuesObject: object
-) => cleanObject(swapObjectData(loopObject, valuesObject));
+export const swapObjectCleanedData = (loopObject: object, valuesObject: object) =>
+  cleanObject(swapObjectData(loopObject, valuesObject));

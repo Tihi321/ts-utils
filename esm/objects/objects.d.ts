@@ -50,6 +50,26 @@ export declare const renameKeys: (object: object, callback: (key: string, value:
  */
 export declare const objectLoop: (object: object, callback: (value: any, key: string, index: number) => any) => void;
 /**
+ * Takes array of keys, value and object. Returns new object with updated last key with value, and all previous keys are checked if they do not exist they are created dynamically
+ *
+ * @example
+ * const object = {first: {a: 4, b: 8}};
+ * const keys = ["first", "a"];
+ *
+ * // {first: {a: 2, b: 8}}
+ * const updatedObject = setObjectLeaf(["first", "a"], 2, object);
+ *
+ * // {first: {c: 5}}
+ * const updatedObject = setObjectLeaf(["first", "c"], 5, {});
+ *
+ * @param {Array} keys array of string keys for object
+ * @param  {any} value value to add into nested key
+ * @param  {Object} object object to populate
+ * @param  {Function} functionCallback optional function that is called when setting last key, it receives new value and old value and what is returned it is set in that key
+ * @returns returns new object with new added subkey with value
+ */
+export declare function setObjectLeaf(keys: Array<string>, value: any, object: object | undefined, functionCallback: Function): any;
+/**
  * Mapping through object keys and return object with updated values
  * @example
  * const object = {KeyName: {a: 4, b: 8}};

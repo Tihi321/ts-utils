@@ -20,9 +20,7 @@ export var pickFirstObjectItem = function (object, subValue) {
     var returnObj = {};
     Object.entries(object).forEach(function (_a) {
         var key = _a[0], values = _a[1];
-        returnObj[key] = subValue
-            ? head(values)[subValue]
-            : head(values);
+        returnObj[key] = subValue ? head(values)[subValue] : head(values);
     });
     return returnObj;
 };
@@ -71,6 +69,40 @@ export var objectLoop = function (object, callback) {
         callback(value, key, index);
     });
 };
+/**
+ * Takes array of keys, value and object. Returns new object with updated last key with value, and all previous keys are checked if they do not exist they are created dynamically
+ *
+ * @example
+ * const object = {first: {a: 4, b: 8}};
+ * const keys = ["first", "a"];
+ *
+ * // {first: {a: 2, b: 8}}
+ * const updatedObject = setObjectLeaf(["first", "a"], 2, object);
+ *
+ * // {first: {c: 5}}
+ * const updatedObject = setObjectLeaf(["first", "c"], 5, {});
+ *
+ * @param {Array} keys array of string keys for object
+ * @param  {any} value value to add into nested key
+ * @param  {Object} object object to populate
+ * @param  {Function} functionCallback optional function that is called when setting last key, it receives new value and old value and what is returned it is set in that key
+ * @returns returns new object with new added subkey with value
+ */
+export function setObjectLeaf(keys, value, object, functionCallback) {
+    if (object === void 0) { object = {}; }
+    var returnObject = JSON.parse(JSON.stringify(object));
+    var key = keys.pop();
+    var pointer = keys.reduce(function (accumulator, currentValue) {
+        if (accumulator[currentValue] === undefined) {
+            accumulator[currentValue] = {};
+        }
+        return accumulator[currentValue];
+    }, returnObject);
+    pointer[key] = functionCallback
+        ? functionCallback(value, pointer[key])
+        : value;
+    return returnObject;
+}
 /**
  * Mapping through object keys and return object with updated values
  * @example
@@ -122,9 +154,7 @@ export var objectFilter = function (object, callback) {
  - Object to loop.
  * @return {object} returns udapted object
  */
-export var cleanObject = function (object) {
-    return objectFilter(object, function (value) { return Boolean(value); });
-};
+export var cleanObject = function (object) { return objectFilter(object, function (value) { return Boolean(value); }); };
 /**
  * Mapping through object keys and taking values form second object under same key
  * @example
@@ -153,5 +183,7 @@ export var swapObjectData = function (loopObject, valuesObject) {
  * @param {object} valuesObject - Object to take values form
  * @return {object} returns udapted object
  */
-export var swapObjectCleanedData = function (loopObject, valuesObject) { return cleanObject(swapObjectData(loopObject, valuesObject)); };
+export var swapObjectCleanedData = function (loopObject, valuesObject) {
+    return cleanObject(swapObjectData(loopObject, valuesObject));
+};
 //# sourceMappingURL=objects.js.map
