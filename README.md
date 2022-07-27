@@ -21,6 +21,7 @@
   - `cleanObject` &mdash; Mapping through object keys and removing undefined values
   - `swapObjectData` &mdash; Mapping through object keys and taking values form second object under same key
   - `swapObjectCleanedData` &mdash; Mapping through object keys and taking values form second object under same key, all undefined values are removed
+  - `setObjectLeaf` &mdash; similar to setWith from lodash, though this function returns new object. It takes array of keys and value, it updates object last key with value and if keys do not exist it creates them dynamically
 
 - **Functions**
 
