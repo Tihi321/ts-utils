@@ -186,4 +186,23 @@ export var swapObjectData = function (loopObject, valuesObject) {
 export var swapObjectCleanedData = function (loopObject, valuesObject) {
     return cleanObject(swapObjectData(loopObject, valuesObject));
 };
+/**
+ * Get object where keys are sorted alphabetically
+ * @example
+ * const objectToSort = {bKey: "some data", aKey = "some data"};
+ *
+ * // {aKey: "some data", bKey = "some data"}
+ * const newObject = getSortedObject(loopObject);
+ * @param {object} object - Object to sort.
+ * @return {object} returns new sorted object
+ */
+export var getSortedObject = function (object) {
+    return Object.entries(object)
+        .sort(function (first, second) { return first[0].localeCompare(second[0]); })
+        .reduce(function (accumulator, _a) {
+        var key = _a[0], value = _a[1];
+        accumulator[key] = value;
+        return accumulator;
+    }, {});
+};
 //# sourceMappingURL=objects.js.map

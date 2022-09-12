@@ -206,3 +206,22 @@ export const swapObjectData = (loopObject: object, valuesObject: object) => {
  */
 export const swapObjectCleanedData = (loopObject: object, valuesObject: object) =>
   cleanObject(swapObjectData(loopObject, valuesObject));
+
+/**
+ * Get object where keys are sorted alphabetically
+ * @example
+ * const objectToSort = {bKey: "some data", aKey = "some data"};
+ *
+ * // {aKey: "some data", bKey = "some data"}
+ * const newObject = getSortedObject(loopObject);
+ * @param {object} object - Object to sort.
+ * @return {object} returns new sorted object
+ */
+export const getSortedObject = (object: object): object =>
+  Object.entries(object)
+    .sort((first, second) => first[0].localeCompare(second[0]))
+    .reduce((accumulator: { [key: string]: any }, [key, value]) => {
+      accumulator[key] = value;
+
+      return accumulator;
+    }, {});

@@ -131,4 +131,15 @@ export declare const swapObjectData: (loopObject: object, valuesObject: object) 
  * @return {object} returns udapted object
  */
 export declare const swapObjectCleanedData: (loopObject: object, valuesObject: object) => object;
+/**
+ * Get object where keys are sorted alphabetically
+ * @example
+ * const objectToSort = {bKey: "some data", aKey = "some data"};
+ *
+ * // {aKey: "some data", bKey = "some data"}
+ * const newObject = getSortedObject(loopObject);
+ * @param {object} object - Object to sort.
+ * @return {object} returns new sorted object
+ */
+export declare const getSortedObject: (object: object) => object;
 //# sourceMappingURL=objects.d.ts.map

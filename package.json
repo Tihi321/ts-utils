@@ -1,6 +1,6 @@
 {
   "name": "tsl-utils",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "description": "Collection of Lodash like utilities",
   "main": "lib/index.js",
   "module": "esm/index.js",
